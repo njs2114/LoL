@@ -1,6 +1,7 @@
-DATE = "8 Mar 2016"
+DATE = "11 Mar 2016"
 VERSION = 6.4
 
+#TODO keep champions and their viable lanes up to date
 CHAMPS = %w(Aatrox Ahri Akali Alistar Amumu Anivia Annie Ashe Azir
 Bard Blitz Brand Braum Caitlyn Cassi Cho Corki Darius
 Diana Mundo Draven Ekko Elise Eve Ezreal Fiddle Fiora
@@ -197,6 +198,55 @@ def random_champ(lane)
   end
 end
 
+def pick_sim #TODO mirror matches in unequal lanes currently possible in draft pick-sim
+  t1 = []
+  t2 = []
+
+  t1_top = random_champ "top"
+  t1 << t1_top
+
+  t2_top = ""
+  while (t2_top == t1_top || t2_top == "") do
+    t2_top = TOPS.include?(COUNTERS[t1_top][0]) ? COUNTERS[t1_top][0] : random_champ("top")
+  end
+  t2 << t2_top
+  t2_jng = random_champ "jng"
+  t2 << t2_jng
+
+  t1_jng = ""
+  while (t2_jng == t1_jng || t1_jng == "") do
+    t1_jng = JNGS.include?(COUNTERS[t2_jng][0]) ? COUNTERS[t2_jng][0] : random_champ("jng")
+  end
+  t1 << t1_jng
+  t1_mid = random_champ "mid"
+  t1 << t1_mid
+
+  t2_mid = ""
+  while (t2_mid == t1_mid || t2_mid == "") do
+    t2_mid = MIDS.include?(COUNTERS[t1_mid][0]) ? COUNTERS[t1_mid][0] : random_champ("mid")
+  end
+  t2 << t2_mid
+  t2_adc = random_champ "adc"
+  t2 << t2_adc
+
+  t1_adc = ""
+  while (t2_adc == t1_adc || t1_adc == "") do
+    t1_adc = ADCS.include?(COUNTERS[t2_adc][0]) ? COUNTERS[t2_adc][0] : random_champ("adc")
+  end
+  t1 << t1_adc
+  t1_sup = random_champ "sup"
+  t1 << t1_sup
+
+  t2_sup = ""
+  while (t2_sup == t1_sup || t2_sup == "") do
+    t2_sup = SUPS.include?(COUNTERS[t1_sup][0]) ? COUNTERS[t1_sup][0] : random_champ("sup")
+  end
+  t2 << t2_sup
+
+  p "Team1: #{t1.join(", ")}"
+  p "Team2: #{t2.join(", ")}"
+end
+
 def counter_champ(champ)
   champ = champ.capitalize unless champ.nil?
   return "Error: Invalid champion (#{champ}). Valid champions: #{COUNTERS.keys.join(", ")}" unless COUNTERS.keys.include?(champ)
@@ -206,27 +256,31 @@ end
 
 #command loop
 puts "LoL version: #{VERSION}\nLast program update: #{DATE}"
-puts "Please enter a command to find a champion (h/v/r/c/q):"
+puts "Please enter a command to find a champion (h/v/r/s/c/q):"
 while true
-  cmd = gets.chomp
+  cmd = gets.chomp.downcase
   break if cmd == "exit" || cmd == "quit" || cmd == "q"
   case cmd.split[0]
   when "rnd", "r", "random"
     p random_champ cmd.split[1]
   when "ctr", "c", "counter"
     p counter_champ cmd.split[1]
+  when "sim", "s", "simulate"
+    pick_sim
   when "vsn", "v", "version"
     p "#{DATE}: LoL version: #{VERSION}"
   when "help", "h"
     puts "This program is intended to be League of Legends champion selection aid."
     puts "'random' prints a random champion (lane filter accepted)"
     puts "'counters' prints a list of counters to a given champion"
+    puts "'simulate' prints a simulated draft pick"
     puts "'version' prints the date and patch of the last update"
     puts "'exit' quits the program and exits the command loop"
   else
     puts "Error: Invalid command (#{cmd}). Possible commands:"
     puts "- rnd <lane>"
     puts "- ctr <champ>"
+    puts "- sim"
     puts "- vsn"
     puts "- exit"
   end
