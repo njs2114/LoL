@@ -1,51 +1,149 @@
-DATE = "11 Mar 2016"
+DATE = "15 Mar 2016"
 VERSION = 6.4
 
+BANS = %w(Udyr Lux Yi Janna Blitz Voli)
+
 #TODO keep champions and their viable lanes up to date
-CHAMPS = %w(Aatrox Ahri Akali Alistar Amumu Anivia Annie Ashe Azir
-Bard Blitz Brand Braum Caitlyn Cassi Cho Corki Darius
-Diana Mundo Draven Ekko Elise Eve Ezreal Fiddle Fiora
-Fizz Galio Gp Garen Gnar Gragas Graves Hecarim Heimer
-Illaoi Irelia Janna Jarvan Jax Jayce Jhin Jinx Kalista Karma
-Karthus Kassadin Katarina Kayle Kennen Khazix Kindred Kog
-Leblanc Lee Leona Lissandra Lucian Lulu Lux Malphite Malzahar
-Maokai Yi Mf Mord Morgana Nami Nasus Nautilus
-Nidalee Nocturne Nunu Olaf Orianna Pantheon Poppy Quinn Rammus
-Reksai Renekton Rengar Riven Rumble Ryze Sejuani Shaco Shen
-Shy Singed Sion Sivir Skarner Sona Soraka Swain Syndra
-Tahm Talon Taric Teemo Thresh Tristana Trundle Trynd
-Tf Twitch Udyr Urgot Varus Vayne Veigar Velkoz Vi
-Viktor Vlad Voli Warwick Wukong Xerath Xin Yasuo
-Yorick Zac Zed Ziggs Zilean Zyra)
+ROLES = {
+  "Aatrox" => ["top"],
+  "Ahri" => ["mid"],
+  "Akali" => ["top", "mid"],
+  "Alistar" => ["sup"],
+  "Amumu" => ["jng"],
+  "Anivia" => ["mid"],
+  "Annie" => ["mid", "sup"],
+  "Ashe" => ["adc"],
+  "Azir" => ["mid"],
+  "Bard" => ["sup"],
+  "Blitz" => ["sup"],
+  "Brand" => ["mid", "sup"],
+  "Braum" => ["sup"],
+  "Caitlyn" => ["adc"],
+  "Cassi" => ["mid"],
+  "Cho" => ["top", "mid"],
+  "Corki" => ["mid", "adc"],
+  "Darius" => ["top"],
+  "Diana" => ["top", "jng", "mid"],
+  "Mundo" => ["top", "jng"],
+  "Draven" => ["adc"],
+  "Ekko" => ["top", "jng", "mid"],
+  "Elise" => ["jng"],
+  "Eve" => ["jng"],
+  "Ezreal" => ["mid", "adc"],
+  "Fiddle" => ["jng", "sup"],
+  "Fiora" => ["top"],
+  "Fizz" => ["mid"],
+  "Galio" => ["mid"],
+  "Gp" => ["top", "mid"],
+  "Garen" => ["top"],
+  "Gnar" => ["top"],
+  "Gragas" => ["jng"],
+  "Graves" => ["top", "jng"],
+  "Hecarim" => ["top", "jng"],
+  "Heimer" => ["top", "mid"],
+  "Illaoi" => ["top"],
+  "Irelia" => ["top"],
+  "Janna" => ["sup"],
+  "Jarvan" => ["top", "jng"],
+  "Jax" => ["top", "jng"],
+  "Jayce" => ["top", "mid"],
+  "Jhin" => ["adc"],
+  "Jinx" => ["adc"],
+  "Kalista" => ["adc"],
+  "Karma" => ["mid", "sup"],
+  "Karthus" => ["mid"],
+  "Kassadin" => ["mid"],
+  "Katarina" => ["mid"],
+  "Kayle" => ["top", "mid", "sup"],
+  "Kennen" => ["top"],
+  "Khazix" => ["jng"],
+  "Kindred" => ["jng", "adc"],
+  "Kog" => ["adc"],
+  "Leblanc" => ["mid", "sup"],
+  "Lee" => ["top", "jng"],
+  "Leona" => ["sup"],
+  "Lissandra" => ["top", "mid"],
+  "Lucian" => ["adc"],
+  "Lulu" => ["top", "mid", "sup"],
+  "Lux" => ["mid", "sup"],
+  "Malphite" => ["top"],
+  "Malzahar" => ["mid"],
+  "Maokai" => ["top"],
+  "Yi" => ["jng"],
+  "Mf" => ["adc"],
+  "Mord" => ["mid"],
+  "Morgana" => ["top", "mid", "sup"],
+  "Nami" => ["sup"],
+  "Nasus" => ["top"],
+  "Nautilus" => ["top", "jng", "sup"],
+  "Nidalee" => ["jng"],
+  "Nocturne" => ["jng"],
+  "Nunu" => ["jng", "sup"],
+  "Olaf" => ["top", "jng"],
+  "Orianna" => ["mid"],
+  "Pantheon" => ["top", "jng", "sup"],
+  "Poppy" => ["top", "jng", "sup"],
+  "Quinn" => ["top", "jng", "mid"],
+  "Rammus" => ["top", "jng"],
+  "Reksai" => ["jng"],
+  "Renekton" => ["top"],
+  "Rengar" => ["jng"],
+  "Riven" => ["top"],
+  "Rumble" => ["top", "jng"],
+  "Ryze" => ["top", "mid"],
+  "Sejuani" => ["jng"],
+  "Shaco" => ["jng"],
+  "Shen" => ["top"],
+  "Shy" => ["jng"],
+  "Singed" => ["top"],
+  "Sion" => ["top"],
+  "Sivir" => ["adc"],
+  "Skarner" => ["jng"],
+  "Sona" => ["sup"],
+  "Soraka" => ["sup"],
+  "Swain" => ["mid"],
+  "Syndra" => ["mid"],
+  "Tahm" => ["top", "sup"],
+  "Talon" => ["mid"],
+  "Taric" => ["sup"],
+  "Teemo" => ["top", "sup"],
+  "Thresh" => ["sup"],
+  "Tristana" => ["adc"],
+  "Trundle" => ["top", "jng", "sup"],
+  "Trynd" => ["top"],
+  "Tf" => ["mid"],
+  "Twitch" => ["adc"],
+  "Udyr" => ["jng"],
+  "Urgot" => ["top"],
+  "Varus" => ["mid", "adc"],
+  "Vayne" => ["adc"],
+  "Veigar" => ["mid"],
+  "Velkoz" => ["mid", "sup"],
+  "Vi" => ["jng"],
+  "Viktor" => ["mid"],
+  "Vlad" => ["top", "mid"],
+  "Voli" => ["top", "jng"],
+  "Warwick" => ["jng"],
+  "Wukong" => ["top", "jng"],
+  "Xerath" => ["mid"],
+  "Xin" => ["jng"],
+  "Yasuo" => ["top", "mid"],
+  "Yorick" => ["top"],
+  "Zac" => ["jng"],
+  "Zed" => ["mid"],
+  "Ziggs" => ["mid"],
+  "Zilean" => ["mid", "sup"],
+  "Zyra" => ["sup"]
+}
 
-TOPS = %w(Aatrox Cho Darius Mundo Ekko Fiora Gp
-Garen Gnar Graves Hecarim Heimer Illaoi Irelia Jarvan
-Jax Jayce Karma Kayle Kennen Lissandra Lulu Malphite Maokai
-Morgana Nasus Nautilus Olaf Pantheon Poppy Quinn Rammus Renekton
-Riven Rumble Ryze Shen Singed Sion Tahm Teemo Trundle
-Trynd Urgot Vlad Voli Wukong Yasuo Yorick)
+CHAMPS = ROLES.map { |champ| champ[0] }
+TOPS = ROLES.map { |champ| champ[0] if champ[1].include?("top") }.compact
+JNGS = ROLES.map { |champ| champ[0] if champ[1].include?("jng") }.compact
+MIDS = ROLES.map { |champ| champ[0] if champ[1].include?("mid") }.compact
+ADCS = ROLES.map { |champ| champ[0] if champ[1].include?("adc") }.compact
+SUPS = ROLES.map { |champ| champ[0] if champ[1].include?("sup") }.compact
 
-JNGS = %w(Amumu Mundo Ekko Elise Eve Fiddle Gragas Graves
-Hecarim Jarvan Jax Khazix Kindred Lee Yi Nautilus Nidalee
-Nocturne Nunu Olaf Pantheon Poppy Quinn Rammus
-Reksai Rengar Sejuani Shaco Shy Skarner Trundle Udyr Vi
-Voli Warwick Wukong Xin Zac)
-
-MIDS = %w(Ahri Akali Anivia Annie Azir Cassi Cho Corki
-Diana Ekko Ezreal Fizz Galio Heimer Jayce Karma Karthus
-Kassadin Katarina Kayle Leblanc Lissandra Lux Malzahar Morgana
-Orianna Quinn Ryze Swain Syndra Talon Tf Varus Veigar
-Velkoz Viktor Xerath Yasuo Zed Ziggs Zilean)
-
-ADCS = %w(Ashe Caitlyn Corki Draven Ezreal Graves Jhin Jinx Kalista
-Kindred Kog Lucian Mf Sivir Tristana Twitch Urgot Varus Vayne)
-
-SUPS = %w(Alistar Annie Bard Blitz Brand Braum Fiddle
-Janna Karma Kayle Leblanc Leona Lulu Lux Morgana Nami Nautilus
-Nunu Poppy Rammus Sona Soraka Tahm Taric Teemo Thresh Trundle
-Velkoz Zilean Zyra)
-
-#TODO many of these are out of date, or mediocre opinons
+#TODO many of these are out of date, or mediocre opinons (needs updating)
 COUNTERS = {
   "Aatrox" => ["Teemo", "Jax", "Riven"],
   "Ahri" => ["Leblanc", "Ryze", "Kassadin"],
@@ -87,7 +185,7 @@ COUNTERS = {
   "Irelia" => ["Olaf", "Renekton", "Darius", "Garen"],
   "Janna" => ["Sona"],
   "Jarvan" => ["Yorick", "Shen", "Jax", "Vi", "Renketon", "Elise"],
-  "Jax" => ["Renekton", "Garen", "Singed", "Pantheon", "Jayce"],
+  "Jax" => ["Renekton", "Garen", "Singed", "Nidalee", "Pantheon", "Jayce"],
   "Jayce" => ["Yorick", "Irelia", "Fiora", "Wukong", "Xin"],
   "Jhin" => ["?"],
   "Jinx" => ["Ezreal", "Corki", "Sivir", "Draven", "Lucian"],
@@ -102,7 +200,7 @@ COUNTERS = {
   "Kindred" => ["Lee", "Jax", "Xin"],
   "Kog" => ["Blitz", "Lucian", "Gragas", "Thresh"],
   "Leblanc" => ["Galio", "Diana", "Morgana", "Talon", "Mord"],
-  "Lee" => ["Trundle", "Renekton", "Udyr", "Garen", "Riven"],
+  "Lee" => ["Trundle", "Reksai", "Udyr", "Garen", "Riven"],
   "Leona" => ["Morgana", "Alistar", "Janna", "Lulu", "Thresh"],
   "Lissandra" => ["Kassadin", "Diana", "Brand", "Anivia", "Leblanc", "Syndra"],
   "Lucian" => ["Ezreal", "Lucian", "Vayne", "Tristana"],
@@ -189,7 +287,7 @@ def random_champ(lane)
     return JNGS[rand(JNGS.size)]
   when "mid", "middle"
     return MIDS[rand(MIDS.size)]
-  when "adc", "marksman", "bot", "bottom"
+  when "adc", "bot", "bottom"
     return ADCS[rand(ADCS.size)]
   when "sup", "support"
     return SUPS[rand(SUPS.size)]
@@ -198,58 +296,60 @@ def random_champ(lane)
   end
 end
 
-def pick_sim #TODO mirror matches in unequal lanes currently possible in draft pick-sim
+def champ_pick(lane, avail, opponent = "")
+  counters = opponent == "" ? [] : COUNTERS[opponent]
+  counters = counters.select { |counter| avail.include?(counter) }
+  case lane
+  when "top" then counters.each { |counter| return counter if TOPS.include?(counter) }
+  when "jng" then counters.each { |counter| return counter if JNGS.include?(counter) }
+  when "mid" then counters.each { |counter| return counter if MIDS.include?(counter) }
+  when "adc" then counters.each { |counter| return counter if ADCS.include?(counter) }
+  when "sup" then counters.each { |counter| return counter if SUPS.include?(counter) }
+  end
+  pick = random_champ(lane) while(!avail.include?(pick))
+  pick
+end
+
+def draft_sim
+  avail = CHAMPS - BANS
   t1 = []
   t2 = []
 
-  t1_top = random_champ "top"
-  t1 << t1_top
+  t1 << champ_pick("top", avail)
+  avail -= t1
 
-  t2_top = ""
-  while (t2_top == t1_top || t2_top == "") do
-    t2_top = TOPS.include?(COUNTERS[t1_top][0]) ? COUNTERS[t1_top][0] : random_champ("top")
-  end
-  t2 << t2_top
-  t2_jng = random_champ "jng"
-  t2 << t2_jng
+  t2 << champ_pick("top", avail, t1[0])
+  avail -= t2
+  t2 << champ_pick("jng", avail)
+  avail -= t2
 
-  t1_jng = ""
-  while (t2_jng == t1_jng || t1_jng == "") do
-    t1_jng = JNGS.include?(COUNTERS[t2_jng][0]) ? COUNTERS[t2_jng][0] : random_champ("jng")
-  end
-  t1 << t1_jng
-  t1_mid = random_champ "mid"
-  t1 << t1_mid
+  t1 << champ_pick("jng", avail, t2[1])
+  avail -= t1
+  t1 << champ_pick("mid", avail)
+  avail -= t1
 
-  t2_mid = ""
-  while (t2_mid == t1_mid || t2_mid == "") do
-    t2_mid = MIDS.include?(COUNTERS[t1_mid][0]) ? COUNTERS[t1_mid][0] : random_champ("mid")
-  end
-  t2 << t2_mid
-  t2_adc = random_champ "adc"
-  t2 << t2_adc
+  t2 << champ_pick("mid", avail, t1[2])
+  avail -= t2
+  t2 << champ_pick("adc", avail)
+  avail -= t2
 
-  t1_adc = ""
-  while (t2_adc == t1_adc || t1_adc == "") do
-    t1_adc = ADCS.include?(COUNTERS[t2_adc][0]) ? COUNTERS[t2_adc][0] : random_champ("adc")
-  end
-  t1 << t1_adc
-  t1_sup = random_champ "sup"
-  t1 << t1_sup
+  t1 << champ_pick("adc", avail, t2[3])
+  avail -= t1
+  t1 << champ_pick("sup", avail)
+  avail -= t1
 
-  t2_sup = ""
-  while (t2_sup == t1_sup || t2_sup == "") do
-    t2_sup = SUPS.include?(COUNTERS[t1_sup][0]) ? COUNTERS[t1_sup][0] : random_champ("sup")
-  end
-  t2 << t2_sup
+  t2 << champ_pick("sup", avail, t1[4])
+  avail -= t2
 
-  p "Team1: #{t1.join(", ")}"
-  p "Team2: #{t2.join(", ")}"
+  p "Team 1: #{t1.join(", ")}"
+  p "Team 2: #{t2.join(", ")}"
 end
 
 def counter_champ(champ)
   champ = champ.capitalize unless champ.nil?
-  return "Error: Invalid champion (#{champ}). Valid champions: #{COUNTERS.keys.join(", ")}" unless COUNTERS.keys.include?(champ)
+  unless COUNTERS.keys.include?(champ)
+    return "Error: Invalid champion (#{champ}). Valid champions: #{COUNTERS.keys.join(", ")}"
+  end
   return COUNTERS[champ] unless COUNTERS[champ] == ["?"]
   "Still compiling a list of counters for #{champ}"
 end
@@ -266,7 +366,7 @@ while true
   when "ctr", "c", "counter"
     p counter_champ cmd.split[1]
   when "sim", "s", "simulate"
-    pick_sim
+    draft_sim
   when "vsn", "v", "version"
     p "#{DATE}: LoL version: #{VERSION}"
   when "help", "h"
